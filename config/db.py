@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:11sebas09@localhost/Shoes_Maker_Inc'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://Sebas911:1qwertyui9.@ebas911.mysql.pythonanywhere-services.com/Shoes_Maker_Inc'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = -1
 
