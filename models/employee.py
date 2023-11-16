@@ -7,8 +7,7 @@ class Employee(db.Model):
     last_name = db.Column(db.String(45))
     status = db.Column(db.SmallInteger)
 
-    def __init__(self, employee_id, rol_id, name, last_name, status):
-        self.employee_id = employee_id
+    def __init__(self, rol_id, name, last_name, status):
         self.rol_id = rol_id
         self.name = name
         self.last_name = last_name

@@ -22,16 +22,21 @@ def get_employee_by_id(id):
 # Ruta para crear un empleado
 @employee_route.route('/employees', methods=['POST'])
 def create_employee():
-    rol_id = request.json['rol_id']
-    name = request.json['name']
-    last_name = request.json['last_name']
-    status = request.json['status']
+    try:
+        rol_id = request.json['rol_id']
+        name = request.json['name']
+        last_name = request.json['last_name']
+        status = request.json.get('status', None)
 
-    new_employee = Employee(rol_id, name, last_name, status)
-    db.session.add(new_employee)
-    db.session.commit()
+        new_employee = Employee(rol_id=rol_id, name=name, last_name=last_name, status=status)
+        db.session.add(new_employee)
+        db.session.commit()
 
-    return employee_schema.jsonify(new_employee)
+        return employee_schema.jsonify(new_employee)
+    except KeyError as e:
+        return jsonify({"error": f"Missing required field: {e.args[0]}"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # Ruta para actualizar un empleado
 @employee_route.route('/employees/<id>', methods=['PUT'])
