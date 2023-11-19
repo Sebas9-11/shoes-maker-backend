@@ -6,8 +6,6 @@ from decouple import config  # Importa la función config desde python-decouple
 
 app = Flask(__name__)
 
-# Utiliza config para obtener el valor de la variable de entorno
-# app.config['SQLALCHEMY_DATABASE_URI'] = config('DATABASE_URL')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://default:kpwI64qeWinl@ep-yellow-queen-06065312.us-east-1.postgres.vercel-storage.com:5432/verceldb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
