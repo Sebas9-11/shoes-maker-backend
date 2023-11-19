@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_migrate import Migrate
-from decouple import config  # Importa la función config desde python-decouple
 
 app = Flask(__name__)
 
