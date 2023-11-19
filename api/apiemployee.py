@@ -19,7 +19,7 @@ def get_employee_by_id(id):
     employee = Employee.query.get(id)
     return employee_schema.jsonify(employee)
 
-# Ruta para crear un empleado
+# Ruta para crear un empleado n
 @employee_route.route('/employees', methods=['POST'])
 def create_employee():
     try:
