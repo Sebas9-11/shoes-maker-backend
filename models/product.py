@@ -24,3 +24,4 @@ class ProductSchema(ma.Schema):
 
 product_schema = ProductSchema()
 products_schema = ProductSchema(many=True)
+# haz las querys - ignora esto jaujaja 
