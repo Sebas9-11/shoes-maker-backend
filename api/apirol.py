@@ -11,42 +11,48 @@ roles_schema = RolSchema(many=True)
 def get_all_roles():
     all_roles = Rol.query.all()
     result = roles_schema.dump(all_roles)
-    
     return jsonify(result)
 
 # Ruta para obtener un rol por su id
-@rol_route.route('/roles/<id>', methods=['GET'])
-def get_rol_by_id(id):
-    rol = Rol.query.get(id)
-
+@rol_route.route('/roles/<int:id>', methods=['GET'])
+def get_rol_by_id(rol_id):
+    rol = Rol.query.get(rol_id)
     return rol_schema.jsonify(rol)
 
 # Ruta para crear un rol
 @rol_route.route('/roles', methods=['POST'])
 def create_rol():
-    name = request.json['name']
-    new_rol = Rol(name)
-    db.session.add(new_rol)
-    db.session.commit()
+    rol = request.json
+    errs = rol_schema.validate(rol)
 
-    return rol_schema.jsonify(new_rol)
+    if errs:
+        return {"error": errs}, 422
+    
+    result = Rol(rol['name'])
+    db.session.add(result)
+    db.session.commit()
+    return rol_schema.jsonify(result)
 
 # Ruta para actualizar un rol
-@rol_route.route('/roles/<id>', methods=['PUT'])
-def update_rol(id):
-    rol = Rol.query.get(id)
-    name = request.json['name']
-    rol.name = name
-    db.session.commit()
+@rol_route.route('/roles/<int:id>', methods=['PUT'])
+def update_rol(rol_id):
+    rol = request.json
+    errs = rol_schema.validate(rol)
 
-    return rol_schema.jsonify(rol)
+    if errs:
+        return {"error": errs}, 422
+    
+    result = Rol.query.get(rol_id)
+    result.name = rol['name']
+    db.session.commit()
+    return rol_schema.jsonify(result)
+
 
 # Ruta para eliminar un rol
-@rol_route.route('/roles/<id>', methods=['DELETE'])
-def delete_rol(id):
-    rol = Rol.query.get(id)
+@rol_route.route('/roles/<int:id>', methods=['DELETE'])
+def delete_rol(rol_id):
+    rol = Rol.query.get(rol_id)
     db.session.delete(rol)
     db.session.commit()
-
     return rol_schema.jsonify(rol)
 
