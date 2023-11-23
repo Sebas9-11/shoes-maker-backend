@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from config.db import db
-from ..models.production import Production, ProductionSchema
-from ..models.production_employee import EmployeeProduction, EmployeeProductionSchema
+from models.production import Production, ProductionSchema
+from models.production_employee import EmployeeProduction
 from sqlalchemy import text
 
 production_route = Blueprint('production_route', __name__)

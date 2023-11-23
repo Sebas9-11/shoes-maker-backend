@@ -1,7 +1,7 @@
 from config.db import app, db, ma
 from marshmallow import fields, ValidationError
 from sqlalchemy import text
-from ..validations.validation import validate_str
+from validations.validation import validate_str
 
 class Rol(db.Model):
   __tablename__ = 'rol'

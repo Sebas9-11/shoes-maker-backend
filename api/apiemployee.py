@@ -1,8 +1,6 @@
 from config.db import db
 from flask import Blueprint, jsonify, request
 from models.employee import Employee, EmployeeSchema
-from marshmallow import ValidationError
-from sqlalchemy import text
 import json
 
 

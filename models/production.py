@@ -1,5 +1,4 @@
 from config.db import app, db, ma
-from .rol import Rol 
 from sqlalchemy import text
 from marshmallow import fields, ValidationError, validates_schema
 from validations.validation import validate_int

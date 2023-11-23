@@ -1,6 +1,6 @@
 from config.db import app, db, ma
 from marshmallow import fields, ValidationError
-from ..validations.validation import validate_str, validate_int, validate_float
+from validations.validation import validate_str, validate_float
 from sqlalchemy import text
 
 class Product(db.Model):
