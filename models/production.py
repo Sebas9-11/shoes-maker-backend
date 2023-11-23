@@ -2,7 +2,7 @@ from config.db import app, db, ma
 from .rol import Rol 
 from sqlalchemy import text
 from marshmallow import fields, ValidationError, validates_schema
-from ..validations.validation import validate_str, validate_int, validate_float
+from validations.validation import validate_int
 from .product import product_validation_id
 from .employee import not_existing_validator
 
