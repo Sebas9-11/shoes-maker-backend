@@ -2,7 +2,7 @@ from config.db import app, db, ma
 from models.rol import Rol
 from sqlalchemy import text
 from marshmallow import fields, ValidationError
-# from validations.validation import validate_str, validate_int
+from validations.validation import validate_str, validate_int
 
 class Employee(db.Model):
     __tablename__ = 'employee'
