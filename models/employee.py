@@ -26,10 +26,9 @@ def rol_validator(val):
     rol_existing = db.session.query(Rol).filter_by(rol_id=val).first()
 
     if rol_existing is None:
-        raise ValidationError('Rol does not exist.')
+        raise ValidationError('El rol no existe.')
 
 def employee_id_validator(val):
-    
     raw_query = text("SELECT EXISTS(SELECT 1 FROM employee WHERE employee_id = :employee_id)")
     params = {'employee_id': val}
 
@@ -37,7 +36,7 @@ def employee_id_validator(val):
     row = employee_existing.fetchone()
 
     if row[0] == 1:
-        raise ValidationError('Employee already exists.')
+        raise ValidationError('El empleado ya existe.')
 
 def not_existing_validator(val):
     raw_query = text("SELECT EXISTS(SELECT 1 FROM employee WHERE employee_id = :employee_id)")
@@ -47,19 +46,14 @@ def not_existing_validator(val):
     row = employee_existing.fetchone()
 
     if row[0] == 0:
-        raise ValidationError('Employee does not exist.')
-
-
+        raise ValidationError('El empleado no existe.')
 
 class EmployeeSchema(ma.Schema):
     employee_id = fields.Integer(required=True, allow_none=False, validate=[employee_id_validator, validate_int])
     rol_id = fields.Integer(required=True, allow_none=False, validate=[rol_validator, validate_int])
-    name = fields.Str(required=True, allow_none=False, validate= validate_str)
-    last_name = fields.Str(required=True, allow_none=False, validate= validate_str)
-    status = fields.Boolean(allown_none=True, default=True)
+    name = fields.Str(required=True, allow_none=False, validate=validate_str)
+    last_name = fields.Str(required=True, allow_none=False, validate=validate_str)
+    status = fields.Boolean(allow_none=True, default=True)
 
     class Meta:
         fields = ('employee_id', 'rol_id', 'name', 'last_name', 'status')
-
-# employee_schema = EmployeeSchema()
-# employees_schema = EmployeeSchema(many=True)
