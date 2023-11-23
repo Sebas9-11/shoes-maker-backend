@@ -28,7 +28,7 @@ def name_validator(val):
 
 class RolSchema(ma.Schema):
   rol_id = fields.Integer(allow_none=True)
-  mame = fields.Str(required=True, allow_none= False, validate=[name_validator, validate_str])
+  name = fields.Str(required=True, allow_none= False, validate=[name_validator, validate_str])
 
   class Meta:
     fields = ('rol_id', 'name')
